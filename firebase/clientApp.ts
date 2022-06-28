@@ -1,9 +1,7 @@
-import firebase from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import "firebase/auth";
-import "firebase/database";
 
-const clientCredentials = {
+export const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
@@ -14,14 +12,16 @@ const clientCredentials = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-if (firebase.getApps().length <= 0) {
-  firebase.initializeApp(clientCredentials);
-
-  if (typeof window !== "undefined") {
-    if ("measurementId" in clientCredentials) {
-      getAnalytics();
+export default function createFirebaseApp() {
+  if (getApps().length <= 0) {
+    const app = initializeApp(clientCredentials);
+    // Check that `window` is in scope for the analytics module!
+    if (typeof window !== "undefined") {
+      // Enable analytics. https://firebase.google.com/docs/analytics/get-started
+      if ("measurementId" in clientCredentials) {
+        getAnalytics();
+      }
     }
+    return app;
   }
 }
-
-export default firebase;
