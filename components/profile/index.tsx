@@ -1,9 +1,12 @@
 import styles from "./profile.module.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Profile() {
+  const router = useRouter();
   return (
     <header className={styles.profile}>
+      <button onClick={() => router.push("/auth")}> AUTH </button>
       <Image
         className={styles.photo}
         src="/pedroluis.png"

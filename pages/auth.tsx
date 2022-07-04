@@ -1,68 +1,59 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
+import {
+  Auth,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
-const uiConfig = {
-  signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
-};
+import { SignInComponent, AdmScreen } from "../components";
+
+export interface LoginModel {
+  email: string;
+  password: string;
+}
+
+function login(auth: Auth, credentials: LoginModel) {
+  signInWithEmailAndPassword(auth, credentials.email, credentials.password)
+    .then((user) => {
+      console.log(user.user);
+    })
+    .catch((erro) => {
+      console.log({
+        code: erro.code,
+        message: erro.message,
+      });
+    });
+}
 
 function SignInScreen() {
   const router = useRouter();
+  const auth = getAuth();
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
-    const unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged((user) => {
-        setIsSignedIn(!!user);
-      });
+    const unregisterAuthObserver = onAuthStateChanged(auth, (user) => {
+      setIsSignedIn(!!user);
+    });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
   if (!isSignedIn) {
     return (
-      <div
-        style={{
-          margin: "50px",
-        }}
-      >
-        {
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={firebase.auth()}
-          ></StyledFirebaseAuth>
-        }
+      <div id="login" className="flex flex-col items-center mt-5">
+        <button onClick={() => router.push("/")}> HOME </button>
+        <SignInComponent
+          login={(credentials: LoginModel) => login(auth, credentials)}
+        ></SignInComponent>
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        margin: "20px",
-      }}
-    >
-      <p>
-        Bem Vindo {firebase.auth().currentUser?.displayName}! Você está logado.
-      </p>
-
-      <div>
-        <a style={{ marginRight: "5px" }} onClick={() => router.push("/")}>
-          Home
-        </a>
-
-        <a
-          style={{ marginLeft: "5px" }}
-          onClick={() => firebase.auth().signOut()}
-        >
-          Sair
-        </a>
-      </div>
+    <div id="login" className="flex flex-col items-center mt-5">
+      <button onClick={() => router.push("/")}> HOME </button>
+      <AdmScreen></AdmScreen>
     </div>
   );
 }

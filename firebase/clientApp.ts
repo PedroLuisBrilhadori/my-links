@@ -1,6 +1,3 @@
-import { initializeApp, getApps } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
 export const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -11,17 +8,3 @@ export const clientCredentials = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
-
-export default function createFirebaseApp() {
-  if (getApps().length <= 0) {
-    const app = initializeApp(clientCredentials);
-    // Check that `window` is in scope for the analytics module!
-    if (typeof window !== "undefined") {
-      // Enable analytics. https://firebase.google.com/docs/analytics/get-started
-      if ("measurementId" in clientCredentials) {
-        getAnalytics();
-      }
-    }
-    return app;
-  }
-}
