@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Email",
+    "text": "pedroluisbrilhadori@gmail.com",
+    "icon": "EmailIcon",
+    "redirect": "mailto:pedroluisbrilhadori@gmail.com"
+  },
+  {
+    "title": "Whatsapp",
+    "text": "+55 (16) 99271-5668",
+    "icon": "WhatsappIcon",
+    "redirect": "https://api.whatsapp.com/send?phone=5516992715668"
+  }
+]
