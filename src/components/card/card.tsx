@@ -30,7 +30,7 @@ function CardComponent({ text, title, icon, redirect }: CardConfig) {
   const titleCss = config.icon ? `flex justify-between` : `self-center`;
 
   return (
-    <div className="p-1 shadow-xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-2xl w-full m-2">
+    <div className="p-1 shadow-xl bg-gradient-to-r from-blue-700 via-purple-500 to-blue-900 rounded-2xl w-full mt-2">
       <a
         rel="noreferrer"
         target="_blank"
