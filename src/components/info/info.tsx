@@ -7,48 +7,13 @@ interface InfoConfig {
   infos?: CardConfig[];
   url?: string;
 }
-const Cards: CardConfig[] = [];
 
-function InfoComponent({ title, infos, url }: InfoConfig) {
-  if (!url && !infos) {
-    throw new Error("Erro, informações não disponíveis");
-  }
-
-  const [cards, setCards] = useState(infos);
-  const [loadCards, setLoadCards] = useState(infos ? true : false);
-
-  const fetchCards = async () => {
-    try {
-      const response = await fetch(url ?? "");
-      const json = await response.json();
-      return { success: true, data: json };
-    } catch (error) {
-      console.log(error);
-      return { success: false };
-    }
-  };
-
-  useEffect(() => {
-    (async () => {
-      if (!url) {
-        setLoadCards(true);
-        return;
-      }
-
-      setLoadCards(false);
-      const cards = await fetchCards();
-      if (cards.success) {
-        setCards(cards.data);
-        setLoadCards(true);
-      }
-    })();
-  }, []);
-
+function InfoComponent({ title, infos }: InfoConfig) {
   return (
     <div className="flex flex-col items-center w-full mt-3">
       <h1 className="text-xl font-bold">{title}</h1>
       <div className="w-full">
-        {cards?.map((card) => (
+        {infos?.map((card) => (
           <CardComponent
             key={card.title}
             title={card.title}
