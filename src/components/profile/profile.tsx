@@ -16,8 +16,8 @@ export default function Profile() {
     <div className="flex flex-col m-5 items-center">
       <ProfileImage />
 
-      <h1>{name}</h1>
-      <h3>{tags}</h3>
+      <h1 className="text-xl">{name}</h1>
+      <h3 className=" text-sm">{tags}</h3>
 
       <ProfileCards />
     </div>
