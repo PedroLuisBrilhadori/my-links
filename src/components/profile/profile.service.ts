@@ -71,3 +71,27 @@ export function getImage(setImage: Dispatch<SetStateAction<string>>) {
     setImage(data);
   });
 }
+
+/**
+ * get name from realtime database of google firebase
+ */
+export function getName(setName: Dispatch<SetStateAction<string>>) {
+  const { reference } = referenceInit(Profile.name);
+
+  onValue(reference, (snapshot) => {
+    const data = snapshot.val();
+    setName(data);
+  });
+}
+
+/**
+ * get tags from realtime database of google firebase
+ */
+export function getTags(setTags: Dispatch<SetStateAction<string>>) {
+  const { reference } = referenceInit(Profile.tags);
+
+  onValue(reference, (snapshot) => {
+    const data = snapshot.val();
+    setTags(data);
+  });
+}
