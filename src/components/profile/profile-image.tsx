@@ -1,6 +1,8 @@
+import { useOnValue } from "../../hooks";
+
 import Image from "next/image";
+
 import { ProfileReferences } from "../../firebase/references";
-import { useOnValue } from "./profile.hooks";
 
 export default function ProfileImage() {
   const [image] = useOnValue(ProfileReferences.photo, "/loading.gif");

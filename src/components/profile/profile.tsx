@@ -1,6 +1,7 @@
-import { useOnValue } from "./profile.hooks";
+import { useOnValue } from "../../hooks";
 
 import ProfileImage from "./profile-image";
+
 import { ProfileReferences } from "../../firebase/references";
 import { ProfileCards } from "./profile-cards";
 

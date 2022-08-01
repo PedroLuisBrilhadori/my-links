@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 
-import { CardModel } from "../card";
-import { ProfileReferences } from "../../firebase";
-import { SectionModel } from "./profile.models";
+import { CardModel } from "../components/card";
+import { ProfileReferences } from "../firebase";
+import { SectionModel } from "../components/profile/profile.models";
 
 /**
  * return reference and database

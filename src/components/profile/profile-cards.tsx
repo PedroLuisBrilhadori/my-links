@@ -1,4 +1,4 @@
-import { useSections } from "./profile.hooks";
+import { useSections } from "../../hooks";
 
 import InfoComponent from "../info/info";
 
