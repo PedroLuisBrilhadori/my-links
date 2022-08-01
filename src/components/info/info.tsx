@@ -1,14 +1,8 @@
-import { CardConfig } from "../card";
 import { CardComponent } from "../";
-import { useEffect, useState } from "react";
 
-interface InfoConfig {
-  title: string;
-  infos?: CardConfig[];
-  url?: string;
-}
+import { InfoModel } from "./info.model";
 
-function InfoComponent({ title, infos }: InfoConfig) {
+function InfoComponent({ title, infos }: InfoModel) {
   return (
     <div className="flex flex-col items-center w-full mt-3">
       <h1 className="text-xl font-bold">{title}</h1>
