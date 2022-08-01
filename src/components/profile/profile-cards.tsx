@@ -1,19 +1,9 @@
-import InfoComponent from "../info/info";
-import { useEffect, useState } from "react";
-import { getSections, SectionConfig } from "./profile.service";
+import { useSections } from "./profile.hooks";
 
-let section: SectionConfig[] = [];
+import InfoComponent from "../info/info";
 
 export function ProfileCards() {
-  const [sections, setSections] = useState(section);
-  const [sectionLoad, setLoadSection] = useState(true);
-
-  useEffect(() => {
-    if (sectionLoad) {
-      getSections(setSections);
-      setLoadSection(false);
-    }
-  }, []);
+  const [sections] = useSections();
 
   return (
     <div className="flex flex-col items-center max-w-sm w-full">

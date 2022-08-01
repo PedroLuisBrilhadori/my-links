@@ -5,7 +5,7 @@ export interface ProfileModel {
   cards: string;
 }
 
-export const Profile: ProfileModel = {
+export const ProfileReferences: ProfileModel = {
   name: "profile/name",
   tags: "profile/tags",
   photo: "profile/photo",

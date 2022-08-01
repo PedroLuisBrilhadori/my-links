@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
-import { ProfileCards } from "./profile-cards";
+import { useOnValue } from "./profile.hooks";
+
 import ProfileImage from "./profile-image";
-import { getName, getTags } from "./profile.service";
+import { ProfileReferences } from "../../firebase/references";
+import { ProfileCards } from "./profile-cards";
 
 export default function Profile() {
-  const [name, setName] = useState("");
-  const [tags, setTags] = useState("");
-
-  useEffect(() => {
-    getName(setName);
-    getTags(setTags);
-  }, []);
+  const [name] = useOnValue(ProfileReferences.name);
+  const [tags] = useOnValue(ProfileReferences.tags);
 
   return (
     <div className="flex flex-col m-5 items-center">

@@ -1,13 +1,7 @@
 import Icons from "../icons";
+import { CardModel } from "./card.models";
 
-export interface CardConfig {
-  title: string;
-  text: string;
-  icon?: string;
-  redirect?: string;
-}
-
-function CardComponent({ text, title, icon, redirect }: CardConfig) {
+function CardComponent({ text, title, icon, redirect }: CardModel) {
   const config = {
     title: title,
     text: text,

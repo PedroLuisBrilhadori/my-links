@@ -1,13 +1,9 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getImage } from "./profile.service";
+import { ProfileReferences } from "../../firebase/references";
+import { useOnValue } from "./profile.hooks";
 
 export default function ProfileImage() {
-  const [image, setImage] = useState("/loading.gif");
-
-  useEffect(() => {
-    getImage(setImage);
-  }, []);
+  const [image] = useOnValue(ProfileReferences.photo, "/loading.gif");
 
   return (
     <Image
